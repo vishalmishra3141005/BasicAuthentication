@@ -8,5 +8,6 @@ module.exports.signup = function(req, res) {
 }
 
 module.exports.profile = function(req, res) {
-
+    res.render("profile", { title: "Profile" });
 }
+

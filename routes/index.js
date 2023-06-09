@@ -1,13 +1,13 @@
 
-const loginController = require("../controllers/LoginController");
+const LoginController = require("../controllers/LoginController");
 
 const express = require("express");
 
 const route = express.Router();
 
-route.get("/", loginController.login);
-route.get("/login", loginController.login);
-route.get("/signup", loginController.signup);
-route.get("/profile", loginController.profile);
+route.get("/", LoginController.login);
+route.get("/login", LoginController.login);
+route.get("/signup", LoginController.signup);
+route.get("/profile", LoginController.profile);
 
 module.exports = route;

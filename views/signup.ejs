@@ -4,11 +4,18 @@
 
 <div class="main-container">
     <div class="signup-container">
-        <form method="post" action="/login">
-            <input name="email" type="text" placeholder="Email" />
-            <input name="password" type="password" placeholder="Password" />
-            <input name="confirm-password" type="password" placeholder="Confirm Password" />
-            <button>Sign Up</button>
+        <form method="post" action="/signup">
+            <input required id="email" name="email" type="email" placeholder="Email" />
+            <input required id="password" name="password" type="password" placeholder="Password" />
+            <input required id="confirm-password" name="confirm-password" type="password" placeholder="Confirm Password" />
+            <button id="submit-button" type="submit">Sign Up</button>
         </form>
     </div>
+    <div style="color: red; font-size: 20px;">
+        <% if (error) { %>
+            <span><%= error %>%></span>
+        <% } %>
+    </div>
 </div>
+
+<script src="/js/signup/signup.js"></script>

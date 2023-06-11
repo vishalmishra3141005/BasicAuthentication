@@ -10,10 +10,6 @@ const User = mongoose.model("User", new mongoose.Schema({
         type: String,
         required: true,
     },
-    username: {
-        type: String,
-        required: true
-    }
 }, {timestamps: true}));
 
 module.exports = User;

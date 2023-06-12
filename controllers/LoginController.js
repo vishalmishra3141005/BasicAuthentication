@@ -1,6 +1,7 @@
 
 
 const User = require("../models/User");
+
 const bcrypt = require("bcrypt");
 
 
@@ -8,7 +9,7 @@ module.exports.login = function(req, res) {
     if (req.isAuthenticated()) {
         res.redirect("/");
     }
-    res.render("login", { title: "Login" });
+    res.render("login", { title: "Login", error: null, });
 }
 
 module.exports.signup = function(req, res) {
@@ -59,5 +60,22 @@ module.exports.postLogout = function(req, res) {
 }
 
 module.exports.googleAuth = function(req, res) {
+    res.redirect("/");
+}
+
+module.exports.invalidLogin = function(req, res) {
+    res.render("login", { title: "Login", error: true });
+}
+
+module.exports.resetPassword = function(req, res) {
+    res.render("reset-password", { title: "Reset Password" });
+}
+
+module.exports.postResetPassword = function(req, res) {
+    bcrypt.hash(req.body.password, 10, async function(err, hash) {
+        if (!err) {
+            await User.findOneAndUpdate({email: req.user.email}, { password: hash });
+        }
+    });
     res.redirect("/");
 }

@@ -24,6 +24,10 @@
 
         <button class="signup-button">Create new account</button>
     </div>
+    <% if (error) { %>
+        <div style="font-size: 18px; color: red;"><span>Invalid user/password</span></div>
+    <% } %>
+
 </div>
 
 <script src="/js/login/login.js"></script>

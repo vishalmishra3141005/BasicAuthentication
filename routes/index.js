@@ -16,7 +16,7 @@ route.get("/", Authentication.checkAuthenticated, LoginController.profile);
 route.get("/login", LoginController.login);
 
 route.post("/login", passport.authenticate("local", {
-        failureRedirect: "/login",
+        failureRedirect: "/login/invalid",
     }),
     LoginController.postLogin,
 );
@@ -39,5 +39,12 @@ route.get("/auth/google/callback", passport.authenticate(
     "google",
     { failureRedirect: "/login", }
 ), LoginController.googleAuth);
+
+
+route.get("/login/invalid", LoginController.invalidLogin);
+
+route.get("/pass-change", Authentication.checkAuthenticated, LoginController.resetPassword);
+
+route.post("/pass-change", Authentication.checkAuthenticated, LoginController.postResetPassword);
 
 module.exports = route;

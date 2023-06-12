@@ -2,17 +2,21 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 
+require("dotenv").config();
+
 const path = require("path");
+
+
 
 const passport = require("passport");
 const passportLocal = require("./config/passportLocal");
+// const passportGoogle = require("../config/")
 
 const expressSession = require("express-session");
 
 const db = require("./config/mongoose");
 
 
-require("dotenv").config();
 
 const app = express();
 

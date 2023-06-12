@@ -2,6 +2,8 @@
 const LoginController = require("../controllers/LoginController");
 const passport = require("passport");
 const passportLocal = require("../config/passportLocal");
+const passportGoogle = require("../config/passportGoogle");
+
 
 const Authentication = require("../middleware/Authentication");
 
@@ -28,5 +30,14 @@ route.get("/profile", Authentication.checkAuthenticated, LoginController.profile
 
 route.post("/logout", LoginController.postLogout);
 
+route.get("/auth/google", passport.authenticate(
+    "google",
+    { scope: ["profile", "email"] }
+));
+
+route.get("/auth/google/callback", passport.authenticate(
+    "google",
+    { failureRedirect: "/login", }
+), LoginController.googleAuth);
 
 module.exports = route;

@@ -58,3 +58,6 @@ module.exports.postLogout = function(req, res) {
     res.redirect("/login");
 }
 
+module.exports.googleAuth = function(req, res) {
+    res.redirect("/");
+}

@@ -1,9 +1,9 @@
 
 const mongoose = require("mongoose");
 
-const mongoUrl = "mongodb://localhost:27017";
+const mongoUrl = process.env.MONGO_URL;
 
-const database = "coms";
+const database = process.env.MONGO_DB;
 
 async function connectDatabase() {
     try {

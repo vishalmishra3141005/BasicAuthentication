@@ -5,6 +5,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
 
+
 module.exports.login = function(req, res) {
     if (req.isAuthenticated()) {
         res.redirect("/");
@@ -64,6 +65,9 @@ module.exports.googleAuth = function(req, res) {
 }
 
 module.exports.invalidLogin = function(req, res) {
+    if (req.isAuthenticated()) {
+        res.redirect("/");
+    }
     res.render("login", { title: "Login", error: true });
 }
 
@@ -78,4 +82,38 @@ module.exports.postResetPassword = function(req, res) {
         }
     });
     res.redirect("/");
+}
+
+module.exports.lostPass = function(req, res) {
+    if (req.isAuthenticated()) {
+        res.redirect("/");
+    }
+    res.render("lost-pass", { title: "Lost Password" });
+}
+
+module.exports.postLostPass = function(req, res) {
+    if (req.isAuthenticated()) {
+        res.redirect("/");
+    }
+    console.log(req.body);
+
+    console.log(process.env.GMAIL_ID);
+    console.log(process.env.GMAIL_PASS);
+    const transporter = require("../config/nodemailerconfig");
+    const mailer = async function() {
+        let info = await transporter.sendMail({
+            from: process.env.GMAIL_ID,
+            to: req.body.email,
+            subject: "Password  Reset",
+            html: `Password Reset Link <a href="${process.env.HOST_NAME}\reset-password-link">`,
+        }, function(err, info) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(info);
+            }
+        });
+    }
+    mailer();
+    res.redirect("/login");
 }

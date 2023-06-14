@@ -6,6 +6,7 @@ require("dotenv").config();
 
 const path = require("path");
 
+const MongoStore = require("connect-mongo");
 
 
 const passport = require("passport");
@@ -30,7 +31,12 @@ app.use(expressSession({
     name: "ID",
     cookie: {
         maxAge: (1000 * 3600),
-    }
+    },
+    // store: MongoStore.create({
+    //     mongoUrl: process.env.MONGO_URL,
+    //     dbName: process.env.MONGO_STORE_DB,
+    //     collectionName: process.env.MONGO_STORE_COLLECTION,
+    // })
 }));
 
 app.use(passport.initialize());

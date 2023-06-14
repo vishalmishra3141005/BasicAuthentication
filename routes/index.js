@@ -47,4 +47,9 @@ route.get("/pass-change", Authentication.checkAuthenticated, LoginController.res
 
 route.post("/pass-change", Authentication.checkAuthenticated, LoginController.postResetPassword);
 
+
+route.get("/lost-pass", LoginController.lostPass);
+
+route.post("/lost-pass", LoginController.postLostPass);
+
 module.exports = route;

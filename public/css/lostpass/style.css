@@ -1,0 +1,43 @@
+.main-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F0F2F5;
+}
+
+.reset-container {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 5px 5px #DEE0E2;
+    gap: 10px;
+}
+
+.reset-container input {
+    font-family: sans-serif;
+    font-size: 20px;
+    height: 50px;
+    width: 350px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: black;
+    padding: 10px;
+}
+
+.reset-container button {
+    font-family: sans-serif;
+    font-size: 17px;
+    height: 50px;
+    width: 350px;
+    background-color: #1877F2;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+}

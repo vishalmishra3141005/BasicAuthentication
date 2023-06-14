@@ -6,3 +6,8 @@ googleLogin.addEventListener("click", function(e) {
 });
 
 
+const signupButton = document.querySelector(".signup-button");
+
+signupButton.addEventListener("click", function(e) {
+    window.open("/signup", "_self");
+})

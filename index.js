@@ -32,11 +32,11 @@ app.use(expressSession({
     cookie: {
         maxAge: (1000 * 3600),
     },
-    // store: MongoStore.create({
-    //     mongoUrl: process.env.MONGO_URL,
-    //     dbName: process.env.MONGO_STORE_DB,
-    //     collectionName: process.env.MONGO_STORE_COLLECTION,
-    // })
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URL,
+        dbName: process.env.MONGO_STORE_SESSION_DB,
+        collectionName: process.env.MONGO_STORE_SESSION_COLLECTION,
+    })
 }));
 
 app.use(passport.initialize());

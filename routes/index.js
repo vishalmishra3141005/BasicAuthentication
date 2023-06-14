@@ -52,4 +52,9 @@ route.get("/lost-pass", LoginController.lostPass);
 
 route.post("/lost-pass", LoginController.postLostPass);
 
+
+route.get("/lostpassreset", LoginController.lostPassReset);
+
+route.post("/lostpassreset", LoginController.postLostPassReset);
+
 module.exports = route;

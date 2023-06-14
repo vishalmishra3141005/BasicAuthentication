@@ -143,7 +143,6 @@ module.exports.lostPassReset = function(req, res) {
     if (req.isAuthenticated()) {
         res.redirect("/");
     }
-    console.log(req.params);
     res.render("lostpassreset", { title: "Lost Password" });
 }
 

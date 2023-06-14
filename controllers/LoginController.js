@@ -114,9 +114,12 @@ module.exports.postLostPass = function(req, res) {
     }
 
     saveData();
+
     const link = `${process.env.HOST_NAME}/lostpassreset?email=${req.body.email}&time=${entime}`;
     const transporter = require("../config/nodemailerconfig");
+
     const mailer = async function() {
+
         let info = await transporter.sendMail({
             from: process.env.GMAIL_ID,
             to: req.body.email,
@@ -130,6 +133,7 @@ module.exports.postLostPass = function(req, res) {
             }
         });
     }
+
     mailer();
     res.redirect("/login");
 }
@@ -147,4 +151,6 @@ module.exports.postLostPassReset = function(req, res) {
     if (req.isAuthenticated()) {
         res.redirect("/");
     }
+    console.log(req.params);
+    res.render("/");
 }

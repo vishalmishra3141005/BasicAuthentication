@@ -3,6 +3,7 @@
 
 <div class="main-container">
     <form class="reset-container" method="post" action="/lostpassreset">
+        <input id="email" readonly type="text" name="email" value=<%= email %> />
         <input id="pass" requried type="password" name="password" placeholder="New password"/>
         <input id="con-pass" required type="password" name="confirm-pass" placeholder="Confirm new password"/>
         <button id="submit" type="submit">Submit</button>

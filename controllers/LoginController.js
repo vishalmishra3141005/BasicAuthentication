@@ -128,8 +128,6 @@ module.exports.postLostPass = function(req, res) {
         }, function(err, info) {
             if (err) {
                 console.log(err);
-            } else {
-                console.log(info);
             }
         });
     }
@@ -143,13 +141,60 @@ module.exports.lostPassReset = function(req, res) {
     if (req.isAuthenticated()) {
         res.redirect("/");
     }
-    res.render("lostpassreset", { title: "Lost Password" });
+    let email = req.query.email;
+    let entime = req.query.time;
+
+    if (!email || !entime) {
+        res.render("/");
+    }
+
+    const emailData = async function() {
+        try {
+
+            let user = await Reset.findOne({email: email, time: entime}).exec();
+            if (user) {
+                const Cryptr = new cryptr(process.env.EN_SECRET_KEY);
+                const dntimeString = Cryptr.decrypt(entime);
+                const dntime = parseInt(dntimeString);
+                const nowTime = Date.now();
+                const expireTime = 1000 * 60 * 5;
+
+                if (nowTime - dntime > expireTime) {
+                    res.redirect("/");
+                } else {
+                    Reset.deleteOne({email: email, time: entime});
+                    res.render("lostpassreset", {title: "Lost Password", email: email});
+                }
+            } else {
+                res.redirect("/");
+            }
+        } catch (err) {
+            res.render("/");
+        }
+    }
+
+    emailData();
 }
 
 module.exports.postLostPassReset = function(req, res) {
     if (req.isAuthenticated()) {
         res.redirect("/");
     }
-    console.log(req.params);
-    res.render("/");
+
+
+    const passwordChange = async function() {
+        let email = req.body.email;
+        bcrypt.hash(req.body.password, 10, async function(err, hash) {
+            try {
+                let user = await User.findOneAndUpdate({email: email}, {password: hash}).exec();
+            } catch(err) {
+                console.log(err);
+            }
+        });
+        console.log("updated");
+        res.redirect("/");
+    }
+
+    passwordChange();
+
 }
